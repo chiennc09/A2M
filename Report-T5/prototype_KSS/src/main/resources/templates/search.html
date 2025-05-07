@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results - Best School</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="breadcrumb">
+    <a href="/">Home</a> > <span>Search for school</span>
+</div>
+
+<div class="search-results">
+    <h2>There's <span th:text="${schoolCount}"></span> schools that match your search criteria</h2>
+
+    <div class="filters">
+        <form th:action="@{/search}" method="post">
+            <h3>Refine your search</h3>
+            <label>Type of your schools</label>
+            <select name="type">
+                <option value="">All</option>
+                <option value="Public">Public</option>
+                <option value="Private">Private</option>
+            </select>
+
+            <label>Admission age (from)</label>
+            <select name="admissionAge">
+                <option value="">Any</option>
+                <option value="6 months">6 months</option>
+                <option value="1 year">1 year</option>
+            </select>
+
+            <label>Monthly fee (VND/month)</label>
+            <div class="fee-range">
+                <input type="number" name="minFee" placeholder="Min"/>
+                <input type="number" name="maxFee" placeholder="Max"/>
+            </div>
+
+            <label>Facilities</label>
+            <div class="checkbox-group">
+                <input type="checkbox" name="facilities" value="Outdoor playground"/> Outdoor playground<br/>
+                <input type="checkbox" name="facilities" value="Swimming pool"/> Swimming pool<br/>
+                <input type="checkbox" name="facilities" value="Cafeteria"/> Cafeteria<br/>
+                <input type="checkbox" name="facilities" value="Musical room"/> Musical room<br/>
+                <input type="checkbox" name="facilities" value="PE room"/> PE room<br/>
+                <input type="checkbox" name="facilities" value="STEM room"/> STEM room<br/>
+                <input type="checkbox" name="facilities" value="Computer room"/> Computer room<br/>
+                <input type="checkbox" name="facilities" value="Camera"/> Camera
+            </div>
+
+            <label>Utilities</label>
+            <div class="checkbox-group">
+                <input type="checkbox" name="utilities" value="School bus"/> School bus<br/>
+                <input type="checkbox" name="utilities" value="Breakfast"/> Breakfast<br/>
+                <input type="checkbox" name="utilities" value="Afterschool care"/> Afterschool care<br/>
+                <input type="checkbox" name="utilities" value="Saturday class"/> Saturday class<br/>
+                <input type="checkbox" name="utilities" value="Health check"/> Health check<br/>
+                <input type="checkbox" name="utilities" value="Contact book"/> Contact book
+            </div>
+
+            <button type="submit">Apply Filters</button>
+        </form>
+    </div>
+
+    <div class="school-list">
+        <div class="sort-options">
+            <label>Sort by:</label>
+            <select>
+                <option>Rating</option>
+            </select>
+        </div>
+        <div th:each="school : ${schools}" class="school-card">
+            <div class="school-image">
+                <img src="/images/1.jpg" alt="School Image"/>
+            </div>
+            <div class="school-details">
+                <h3 th:text="${school.name}"></h3>
+                <p><strong>Address:</strong> <span th:text="${school.address}"></span></p>
+                <p><strong>Website:</strong> <a th:href="${school.website}" th:text="${school.website}"></a></p>
+                <p><strong>Tuition fee:</strong> <span th:text="${school.tuitionFee}"></span></p>
+                <p><strong>Admission age:</strong> <span th:text="${school.admissionAge}"></span></p>
+                <p><strong>School type:</strong> <span th:text="${school.schoolType}"></span></p>
+                <div class="rating">
+                    <span class="star filled">★</span>
+                    <span class="star filled">★</span>
+                    <span class="star filled">★</span>
+                    <span class="star filled">★</span>
+                    <span class="star filled">★</span>
+                    <span>(120 ratings)</span>
+                </div>
+                <p><strong>Facilities:</strong>
+                    <span th:each="facility : ${school.facilities}" th:text="${facility} + ' '"></span>
+                </p>
+                <a th:href="@{/school-details(name=${school.name})}" class="request-btn">Request Counseling</a>
+            </div>
+        </div>
+        <div class="pagination">
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

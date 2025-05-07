@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>School Details - Best School</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="breadcrumb">
+    <a href="/">Home</a> > <a href="/search">Search for school</a> > <span>School details</span>
+</div>
+
+<div class="school-details">
+    <div class="school-header">
+        <div class="school-images">
+            <img src="/images/school-placeholder.jpg" alt="School Image"/>
+        </div>
+        <div class="school-info">
+            <h2 th:text="${school.name}"></h2>
+            <p><strong>Address:</strong> <span th:text="${school.address}"></span></p>
+            <p><strong>Website:</strong> <a th:href="${school.website}" th:text="${school.website}"></a></p>
+            <p><strong>Tuition fee:</strong> <span th:text="${school.tuitionFee}"></span></p>
+            <p><strong>Admission age:</strong> <span th:text="${school.admissionAge}"></span></p>
+            <p><strong>School type:</strong> <span th:text="${school.schoolType}"></span></p>
+            <div class="rating">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span>(120 ratings)</span>
+            </div>
+            <a href="#" class="request-btn">Request Counseling</a>
+        </div>
+    </div>
+
+    <div class="school-content">
+        <h3>School Introduction</h3>
+        <p>A snapshot of education in a geographically diverse location, surrounded by significant natural and historical features...</p>
+
+        <h3>Facilities</h3>
+        <div class="checkbox-group">
+            <span th:each="facility : ${school.facilities}">
+                <input type="checkbox" checked disabled/>
+                <span th:text="${facility}"></span><br/>
+            </span>
+        </div>
+
+        <h3>Utilities</h3>
+        <div class="checkbox-group">
+            <span th:each="utility : ${school.utilities}">
+                <input type="checkbox" checked disabled/>
+                <span th:text="${utility}"></span><br/>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

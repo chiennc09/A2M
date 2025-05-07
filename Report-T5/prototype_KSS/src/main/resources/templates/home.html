@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home - Best School</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="hero-section">
+    <div class="search-box">
+        <h2>Find the ideal school</h2>
+        <form th:action="@{/search}" method="post">
+            <div class="search-options">
+                <input type="text" name="name" placeholder="Enter a school name"/>
+                <span class="or-divider">OR</span>
+                <select name="cityProvince">
+                    <option value="">City/Province</option>
+                    <option value="Hanoi">Hanoi</option>
+                    <option value="HCMC">Ho Chi Minh City</option>
+                </select>
+                <select name="district">
+                    <option value="">District</option>
+                    <option value="District 1">District 1</option>
+                    <option value="District 2">District 2</option>
+                </select>
+                <button type="submit">Search</button>
+            </div>
+            <p class="note">Note: Inclusion of a school in the search index does NOT constitute an endorsement</p>
+        </form>
+    </div>
+</div>
+
+<div class="testimonials">
+    <h2>Our Testimonials</h2>
+    <div class="testimonial-list">
+        <div th:each="testimonial : ${testimonials}" class="testimonial">
+            <p class="author" th:text="${testimonial.author}"></p>
+            <p class="content" th:text="${testimonial.content}"></p>
+            <div class="rating">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="about-us">
+    <h2>About Us</h2>
+    <div class="about-cards">
+        <div class="card">
+            <h3>Our School Networks</h3>
+            <p>800+ Preschools and Kindergartens</p>
+        </div>
+        <div class="card">
+            <h3>Parent Community</h3>
+            <p>1500+ parent profiles</p>
+        </div>
+        <div class="card">
+            <h3>Special Consultations</h3>
+            <p>30+ with 5-10 yrs experience</p>
+        </div>
+    </div>
+</div>
+
+<div class="visit-partners">
+    <div class="visit-us">
+        <h2>Come Visit Us</h2>
+        <p>27th FL, EDUCATION TOWER, BACH MAI WARD, HA BA TRUNG DIST, HANOI</p>
+    </div>
+    <div class="partners">
+        <h2>Our Partners</h2>
+        <div class="partner-logos">
+            <img src="/images/ministry-of-education.png" alt="Ministry of Education"/>
+            <img src="/images/cbs.png" alt="CBS"/>
+            <img src="/images/education-news.png" alt="Education News"/>
+            <img src="/images/kids.png" alt="Kids"/>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
