@@ -11,9 +11,11 @@
 <div class="breadcrumb">
     <a href="/">Home</a> > <span>Search for school</span>
 </div>
+<div class="result-text">
+    <h2>There's <span th:text="${schoolCount}"></span> schools that match your search criteria</h2>
+</div>
 
 <div class="search-results">
-    <h2>There's <span th:text="${schoolCount}"></span> schools that match your search criteria</h2>
 
     <div class="filters">
         <form th:action="@{/search}" method="post">
@@ -69,6 +71,8 @@
             <label>Sort by:</label>
             <select>
                 <option>Rating</option>
+                <option>Fee</option>
+                <option>Number of rating</option>
             </select>
         </div>
         <div th:each="school : ${schools}" class="school-card">

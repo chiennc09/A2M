@@ -13,17 +13,34 @@
 </div>
 
 <div class="school-details">
+    <div class="school-img">
+        <div class="image-result">
+            <img src="/images/1.jpg" alt="School Image"/>
+        </div>
+        <div class="image-scroll">
+            <img src="/images/1.jpg" alt="School Image" style="border: 2px solid #6495ED"/>
+            <img src="/images/1.jpg" alt="School Image"/>
+            <img src="/images/1.jpg" alt="School Image"/>
+        </div>
+        <div class="dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
     <div class="school-header">
         <div class="school-images">
             <img src="/images/school-placeholder.jpg" alt="School Image"/>
         </div>
         <div class="school-info">
             <h2 th:text="${school.name}"></h2>
-            <p><strong>Address:</strong> <span th:text="${school.address}"></span></p>
-            <p><strong>Website:</strong> <a th:href="${school.website}" th:text="${school.website}"></a></p>
-            <p><strong>Tuition fee:</strong> <span th:text="${school.tuitionFee}"></span></p>
-            <p><strong>Admission age:</strong> <span th:text="${school.admissionAge}"></span></p>
-            <p><strong>School type:</strong> <span th:text="${school.schoolType}"></span></p>
+            <p><strong>Address:         </strong> <span th:text="${school.address}"></span></p>
+            <p><strong>Website:         </strong> <a th:href="${school.website}" th:text="${school.website}"></a></p>
+            <p><strong>Tuition fee:     </strong> <span th:text="${school.tuitionFee}"></span></p>
+            <p><strong>Admission age:   </strong> <span th:text="${school.admissionAge}"></span></p>
+            <p><strong>School type:     </strong> <span th:text="${school.schoolType}"></span></p>
             <div class="rating">
                 <span class="star filled">★</span>
                 <span class="star filled">★</span>
@@ -32,32 +49,109 @@
                 <span class="star filled">★</span>
                 <span>(120 ratings)</span>
             </div>
-            <a href="#" class="request-btn">Request Counseling</a>
+            <a href="#" class="request-btn" onclick="openModal()">Request Counseling</a>
         </div>
     </div>
 
     <div class="school-content">
-        <h3>School Introduction</h3>
-        <p>A snapshot of education in a geographically diverse location, surrounded by significant natural and historical features...</p>
-
-        <h3>Facilities</h3>
-        <div class="checkbox-group">
-            <span th:each="facility : ${school.facilities}">
-                <input type="checkbox" checked disabled/>
-                <span th:text="${facility}"></span><br/>
-            </span>
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('overview')">Overview</button>
+            <button class="tab" onclick="showTab('ratings')">Ratings</button>
         </div>
 
-        <h3>Utilities</h3>
-        <div class="checkbox-group">
-            <span th:each="utility : ${school.utilities}">
-                <input type="checkbox" checked disabled/>
-                <span th:text="${utility}"></span><br/>
-            </span>
+        <div class="tab-content" id="overview">
+            <h2>School Introduction</h2>
+            <p>
+                <strong>A tradition of excellence</strong><br>
+                Fort Street Public School, situated in a rich geographical location
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci cum dicta eligendi error excepturi magnam nam nihil obcaecati officiis quisquam rerum tenetur, vel. Asperiores nostrum saepe totam ullam velit voluptatum?
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam blanditiis consectetur culpa cumque dicta dignissimos dolorum est illo laudantium magni necessitatibus placeat possimus, quam quia quis tempora temporibus unde vero!
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at consequuntur dicta doloremque ea eius fugit impedit in laudantium, libero nisi nobis officia omnis quam quas reiciendis, tempora tenetur ullam!
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur eum in modi officiis, quo rerum sequi voluptas. Ad consequatur cumque, debitis dolore eligendi excepturi explicabo fugit minus, natus repellendus, veniam!
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur cum dignissimos eius fugiat itaque minima. Consectetur ducimus quod veritatis. Aliquam aperiam assumenda expedita nam non quae quaerat quasi quia voluptatem?
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci alias debitis ea eaque eius eum eveniet harum incidunt, labore nam nesciunt nostrum quae quis saepe vel veniam voluptatibus. Nulla, veritatis!
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, modi, nisi. A animi consequatur delectus, deleniti dolorem, excepturi exercitationem itaque laborum natus, nobis odio officia omnis possimus sint veniam voluptatum?
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid consequuntur eius iste necessitatibus non, odio optio, placeat provident quasi quibusdam quo saepe temporibus, totam? Accusantium consectetur labore quas reprehenderit voluptate!
+            </p>
+
+            <h3>Facilities</h3>
+            <div class="checkbox-group">
+                <label><input type="checkbox"> Outdoor playground</label>
+                <label><input type="checkbox" checked> Swimming pool</label>
+                <label><input type="checkbox" checked> Library</label>
+                <label><input type="checkbox"> Cafeteria</label>
+                <label><input type="checkbox"> Musical room</label>
+                <label><input type="checkbox"> PE room</label>
+                <label><input type="checkbox"> STEM room</label>
+                <label><input type="checkbox"> Camera</label>
+            </div>
+
+            <h3>Utilities</h3>
+            <div class="checkbox-group">
+                <label><input type="checkbox"> School bus</label>
+                <label><input type="checkbox"> Afterschool care</label>
+                <label><input type="checkbox"> Health check</label>
+                <label><input type="checkbox" checked> Breakfast</label>
+                <label><input type="checkbox"> Saturday class</label>
+                <label><input type="checkbox"> Picnic activities</label>
+                <label><input type="checkbox"> E-Contact book</label>
+            </div>
+        </div>
+
+        <div class="tab-content" id="ratings" style="display: none;">
+            <h2>Ratings</h2>
+            <p>Coming soon...</p>
         </div>
     </div>
 </div>
 
+<!-- Modal -->
+<div id="counselingModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">×</span>
+        <h2>Yêu cầu tư vấn</h2>
+        <p>Vui lòng kiểm tra thông tin của bạn và xác nhận để gửi yêu cầu.</p>
+        <form>
+            <label for="fullName">Họ và tên</label>
+            <input type="text" id="fullName" name="fullName" placeholder="Nhập họ và tên của bạn..." required>
+
+            <label for="email">Địa chỉ email</label>
+            <input type="email" id="email" name="email" placeholder="info@xyz.com" value="info@xyz.com" required>
+
+            <label for="mobile">Số điện thoại :</label>
+            <input type="tel" id="mobile" name="mobile" placeholder="+84 - 123456789" value="+84 - 123456789" required>
+
+            <label for="inquiries">Thắc mắc</label>
+            <textarea id="inquiries" name="inquiries" rows="4" placeholder="Nhập thắc mắc của bạn..."></textarea>
+
+            <p class="note">Nhân viên của chúng tôi sẽ liên hệ với bạn trong vòng 24 giờ. Nếu bạn cần hỗ trợ khẩn cấp, vui lòng liên hệ qua hotline 0923-568888.</p>
+
+            <div class="modal-buttons">
+                <button type="button" class="cancel-btn" onclick="closeModal()">Hủy</button>
+                <button type="submit" class="submit-btn">Gửi</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
 <div th:replace="fragments/footer :: footer"></div>
+<script>
+    function openModal() {
+        document.getElementById("counselingModal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById("counselingModal").style.display = "none";
+    }
+
+    // Đóng modal khi nhấn ra ngoài
+    window.onclick = function(event) {
+        const modal = document.getElementById("counselingModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
 </body>
 </html>
